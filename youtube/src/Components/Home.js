@@ -19,23 +19,20 @@ export default class Home extends Component {
     }
     getYoutubeVideos = async (keyWord)  =>{
         //apiKey is AIzaSyA2hz8e-TNG95kuho8zXFIOQGeOcs3VsL4
-        const videoData = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&kind=video&q=${keyWord}&key=${process.env.AIzaSyA2hz8e-TNG95kuho8zXFIOQGeOcs3VsL4 }`)
+        const videoData = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${keyWord}&key=${process.env.AIzaSyA2hz8e-TNG95kuho8zXFIOQGeOcs3VsL4 }`)
         const videoList = videoData.data.items
         this.setState({
             videos: videoList,
         })
     }
-    visibility = () => {
-        this.setState({
-            visibility: !this.state.visibility,
-        })
-    }
+
 
     handleSubmit = (event) => {
         event.preventDefault()
         this.getYoutubeVideos(this.state.input)
         this.setState({
             input: '',
+            visibility: true
         })
     }
     render() {
